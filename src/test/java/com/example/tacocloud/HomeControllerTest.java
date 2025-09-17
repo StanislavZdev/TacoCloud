@@ -1,7 +1,7 @@
 package com.example.tacocloud;
 
 
-import com.example.tacocloud.web.HomeController;
+import com.example.tacocloud.tacos.web.HomeController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

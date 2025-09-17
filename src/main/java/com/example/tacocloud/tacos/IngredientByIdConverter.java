@@ -1,4 +1,4 @@
-package com.example.tacocloud.general;
+package com.example.tacocloud.tacos;
 
 
 import org.springframework.core.convert.converter.Converter;
@@ -21,7 +21,8 @@ public class IngredientByIdConverter implements Converter<String, Ingredient> {
         ingredientMap.put("TMTO",  new Ingredient("TMTO", "Diced Tomatoes", Ingredient.Type.VEGGIES));
         ingredientMap.put("LETC",  new Ingredient("LETC", "Lettuce", Ingredient.Type.VEGGIES));
         ingredientMap.put("CHED",  new Ingredient("CHED", "Chadder", Ingredient.Type.CHEESE));
-        ingredientMap.put("JACK",  new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.SAUCE));
+        ingredientMap.put("JACK",  new Ingredient("JACK", "Monterrey Jack", Ingredient.Type.CHEESE));
+        ingredientMap.put("SlSA",  new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE));
         ingredientMap.put("SRCR",  new Ingredient("SRCR", "Sour Cream", Ingredient.Type.SAUCE));
     }
     @Override

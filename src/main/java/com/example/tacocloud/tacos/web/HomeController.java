@@ -1,4 +1,4 @@
-package com.example.tacocloud.web;
+package com.example.tacocloud.tacos.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,13 +1,17 @@
-package com.example.tacocloud.web;
+package com.example.tacocloud.tacos.web;
 
-import com.example.tacocloud.general.TacoOrder;
+import com.example.tacocloud.tacos.Ingredient;
+import com.example.tacocloud.tacos.Taco;
+import com.example.tacocloud.tacos.TacoOrder;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.tacocloud.general.Ingredient.Type;
-import com.example.tacocloud.general.*;
+import com.example.tacocloud.tacos.Ingredient.Type;
+
 
 
 import java.util.Arrays;
@@ -28,14 +32,15 @@ public class DesignTacoController {
     // Model model контейнер для передачи, который хранит атрибуты как ключ-значения, которые рендерятся в шаблоне
     public void addIngredientsToModel(Model model) {
         List<Ingredient> ingredients = Arrays.asList(
-                new Ingredient("FLT O", "Flour Tortilla", Type.WRAP),
+                new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
                 new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
                 new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
                 new Ingredient("CARN", "Carnitas", Type.PROTEIN),
                 new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
                 new Ingredient("LETC", "Lettuce", Type.VEGGIES),
                 new Ingredient("CHED", "Chadder", Type.CHEESE),
-                new Ingredient("JACK", "Monterrey Jack", Type.SAUCE),
+                new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
+                new Ingredient("SLSA", "Salsa", Ingredient.Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
         Type[] types = Ingredient.Type.values();
@@ -47,28 +52,32 @@ public class DesignTacoController {
     // авто привязка запроса http в обьект
     @ModelAttribute(name = "tacoOrder")
     public TacoOrder order() {
-        log.info("Подготовка заказа");
         return new TacoOrder();
     }
 
     @ModelAttribute(name = "taco")
     public Taco taco() {
-        log.info("Возвращаем тако");
         return new Taco();
     }
     @GetMapping
     public String showDesignForm() {
-        log.info("Показываем форму");
         return "design";
     }
     @PostMapping
-    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+    public String processTaco(
+            @Valid Taco taco,
+            Errors errors,
+            @ModelAttribute TacoOrder tacoOrder) {
+        if(errors.hasErrors()) {
+            return "design";
+        }
+
         tacoOrder.addTaco(taco);
         log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
-         log.info("Фильтруем по типу ингридиентов и собираем в список");
+
         return ingredients
                 .stream()
                 .filter(x -> x.getType().equals(type))
