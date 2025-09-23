@@ -7,11 +7,13 @@ import lombok.Data;
 import org.apache.logging.log4j.message.Message;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
-public class TacoOrder {
+public class TacoOrder implements Serializable {
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
     @NotBlank(message = "Street is required")
@@ -35,9 +37,11 @@ public class TacoOrder {
 
     private List<Taco> tacos = new ArrayList<>();
 
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date placedAt;
+
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
     }
 }
-
-
