@@ -3,6 +3,6 @@ package com.example.tacocloud.tacos;
 import lombok.Data;
 
 @Data
-public class ingredientRef {
+public class IngredientRef {
     private final String ingredient;
 }

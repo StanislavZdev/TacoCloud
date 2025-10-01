@@ -1,17 +1,26 @@
-
 spring:
   application:
     name: taco-cloud
+
   thymeleaf:
     cache: false
+
   datasource:
-    generate-unique-name: false
-    name: tacocloud
-    url: jdbc:h2:mem:tacocloud;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:postgresql://localhost:5433/tacocloud?sslmode=require
+    username: postgres
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
 
-logging:
-  level:
-    com.example: INFO
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
+        logging:
+          level:
+            com.example: INFO
 
 
