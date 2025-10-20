@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/tacocloud?sslmode=require
+    username: postgres
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate  # В проде не изменяй схему авто, используй миграции (Flyway/Liquibase)
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

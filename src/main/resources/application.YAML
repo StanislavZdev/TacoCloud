@@ -1,26 +1,25 @@
 spring:
   application:
     name: taco-cloud
-
+  datasource:
+    url: jdbc:h2:mem:testdb  # In-memory H2 для быстрого старта
+    username: testdb
+    password:  # Пустой по умолчанию
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true  # Доступ к H2 консоли на http://localhost:8080/h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  # Авто-создание/удаление таблиц (для dev)
+    database-platform: org.hibernate.dialect.H2Dialect
   thymeleaf:
     cache: false
 
-  datasource:
-    url: jdbc:postgresql://localhost:5433/tacocloud?sslmode=require
-    username: postgres
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+taco:
+  orders:
+    page-size: 20
 
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-
-        logging:
-          level:
-            com.example: INFO
-
-
+logging:
+  level:
+    tacos: INFO
